@@ -1,5 +1,5 @@
 # Synthetics_Events_Service
-Example Python script running as a Synthetic Job that tests URL endpoints reporting metrics to the Events Data Store
+Example Python script running as a Synthetic Job that tests URL endpoints reporting metrics to the Events Store
 
 A Python script was developed that:
 
