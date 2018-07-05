@@ -9,7 +9,7 @@ python eventsServiceTest.py createSchema schemaA
 
 exampleSchema = { "schema": { "testid":"integer", "status_code":"integer", "status_code_s":"string", "response_time":   "integer", "url":"string", "mesid":"string” }  }
 
-The string representation of status_code (\_s) allowed for the status_code to be used as Legend in dashboard charts.
+The string representation of status_code (\_s) allowed for the status_code to be used as a Legend in dashboard charts.
 
 2) Randomly select a URL from a list of URLs scoped for testing:
 
