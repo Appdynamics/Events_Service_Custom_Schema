@@ -30,10 +30,12 @@ exampleSchema = { "schema": { "testid":           "integer",
                               "mesid":            "string" } }
 
 def createCustomSchema( schema=exampleSchema, auth=[] ):
-    r = requests.post( auth['endPoint'] + "/events/schema/" + auth['schemaName'],
+    url =  auth['endPoint'] + "/events/schema/" + auth['schemaName']
+    print( "createCustomSchema ", auth, createHeaders( auth ), url)
+    r = requests.post( url,
                        data=json.dumps( schema ),
                        headers=createHeaders( auth ) )
-
+    print( "Post metrics ", r.status_code, r.text )
 
 def deleteCustomSchema( auth ):
     r = requests.delete( auth['endPoint'] + "/events/schema/" + auth['schemaName'],
@@ -41,6 +43,7 @@ def deleteCustomSchema( auth ):
 
 
 def postCustomAnalytics( auth, data ):
+    print( "Posting ", auth, data )
     r = requests.post( auth['endPoint'] + "/events/publish/" + auth['schemaName'],
                        data=json.dumps( data ),
                        headers=createHeaders( auth ))
@@ -48,6 +51,33 @@ def postCustomAnalytics( auth, data ):
     if r.status_code != 200:
         print( r.text )
         print( auth )
+
+def postQuery( auth ):
+    query = "select * from {schemaName}".format(schemaName=auth['schemaName'])
+    r = requests.post( auth['endPoint'] + "/events/query",
+                       data=query,
+                       headers=createHeaders( auth ))
+    print( "postQuery ", r.status_code, auth['schemaName'] )
+    if r.status_code == 200:
+        print( r.text )
+
+def queryMetric( auth ):
+        metricPath = "Analytics|TEST1_COUNT"
+        applicationName = "Analytics"
+        params = { 'metric-path': metricPath,
+                   'time-range-type': 'BEFORE_NOW',
+                   'duration-in-hours': '72',
+                   'limit': 1
+                   }
+        url = "http://{controllerHost}:{controllerPort}/controller/rest/applications/{applicationName}".format(
+            controllerHost=auth['controllerHost'], controllerPort=auth['controllerPort'], applicationName=applicationName)
+        r = requests.post( url,
+                    auth=("{0}@{1}".format(auth['controllerAdminUser'],auth['globalAccountName']),
+                          "{0}".format( self.auth['controllerPwd'] )),
+                           params=params, headers=createHeaders( auth ))
+        print( "postQuery ", r.status_code, auth, url, params )
+        if r.status_code == 200:
+            print( r.text )
 
 def getRequestURL( testUrl ):
     status_code = 0
@@ -74,11 +104,19 @@ def runTestCase1( auth, testURL ):
     postCustomAnalytics( auth, data )
 
 # List of URL endpoints to test GET request against
-urlList = [ "https://google.com",
+urlList1 = [ "https://google.com",
              "https://yahoo.com",
              "https://appdynamics.com",
              "https://google.com/TESTERROR" ]
 
+urlList = [ "https://google.com" ]
+
+urlList2 = [ "https://www.underarmour.com/en-us/mens",
+            "https://www.underarmour.com/en-us/womens",
+            "https://www.underarmour.com/en-us/boys",
+            "https://www.underarmour.com/en-us/girls",
+            "https://www.underarmour.com/en-us/ua-icon-customized-gear",
+            "https://www.underarmour.com/en-us/outlet/g/6" ]
 
 
 testURL = urlList[ random.randint( 0, len(urlList)-1 ) ]
@@ -87,9 +125,13 @@ if "driver" not in dir(): # Execute as script from command line
     print( "Running as script")
 
     # Source authentication credentials from environment variables
-    auth = { "endPoint":            os.environ.get('APPD_ANALYTICS_END_POINT'),
-             "globalAccountName":   os.environ.get('APPD_GLOBAL_ACCOUNT_NAME'),
-             "analyticsKey":        os.environ.get('APPD_ANALYTICS_KEY'),
+    auth = { "endPoint":            os.environ.get('APPDYNAMICS_EVENTS_SERVICE_ENDPOINT'),
+             "globalAccountName":   os.environ.get('APPDYNAMICS_GLOBAL_ACCOUNT_NAME'),
+             "analyticsKey":        os.environ.get('APPDYNAMICS_ANALYTICS_API_KEY'),
+             "controllerHost":      os.environ.get('APPDYNAMICS_CONTROLLER_HOST_NAME'),
+             "controllerPort":      os.environ.get('APPDYNAMICS_CONTROLLER_PORT'),
+             "controllerAdminUser": os.environ.get('APPD_CONTROLLER_ADMIN'),
+             "controllerPwd":       os.environ.get('APPD_UNIVERSAL_PWD'),
              "schemaName":          "" }
 
     def get_measurement_id():
@@ -107,6 +149,10 @@ if "driver" not in dir(): # Execute as script from command line
     elif cmd == "deleteSchema": # deleteSchema <schema name>
         auth['schemaName'] = sys.argv[2]
         deleteCustomSchema(auth=auth)
+
+    elif cmd == "query1": # createSchema <schema name>
+        auth['schemaName'] = sys.argv[2]
+        postQuery(auth=auth)
 
     else:
         print( "Commands: runtest1, createSchema, deleteSchema")
