@@ -61,21 +61,19 @@ def postQuery( auth ):
     if r.status_code == 200:
         print( r.text )
 
-def queryMetric( auth ):
+def queryCustomAnalyticsMetric( auth ):
         metricPath = "Analytics|TEST1_COUNT"
-        applicationName = "Analytics"
-        params = { 'metric-path': metricPath,
+        applicationName = "AppDynamics Analytics-2" # From Analytics Metric Browser
+        params = { 'metric-path': metricPath, # From Analytics Metric Browser
                    'time-range-type': 'BEFORE_NOW',
-                   'duration-in-hours': '72',
-                   'limit': 1
+                   'duration-in-mins': '10080', # 60 * 24 * 7
+                   'rollup': 'true', # false for individual values
+                   'output': 'JSON'
                    }
-        url = "http://{controllerHost}:{controllerPort}/controller/rest/applications/{applicationName}".format(
-            controllerHost=auth['controllerHost'], controllerPort=auth['controllerPort'], applicationName=applicationName)
-        r = requests.post( url,
-                    auth=("{0}@{1}".format(auth['controllerAdminUser'],auth['globalAccountName']),
-                          "{0}".format( self.auth['controllerPwd'] )),
-                           params=params, headers=createHeaders( auth ))
-        print( "postQuery ", r.status_code, auth, url, params )
+        r = requests.get("http://{controllerHost}:{controllerPort}/controller/rest/applications/{applicationName}/metric-data".format(
+                            controllerHost=auth['controllerHost'],controllerPort=auth['controllerPort'],applicationName=applicationName),
+                         auth=("{0}@{1}".format(auth['controllerAdminUser'],auth['controllerAccount']),"{0}".format( auth['controllerPwd'] )),
+                         params=params)
         if r.status_code == 200:
             print( r.text )
 
@@ -104,22 +102,10 @@ def runTestCase1( auth, testURL ):
     postCustomAnalytics( auth, data )
 
 # List of URL endpoints to test GET request against
-urlList1 = [ "https://google.com",
+urlList = [ "https://google.com",
              "https://yahoo.com",
              "https://appdynamics.com",
              "https://google.com/TESTERROR" ]
-
-urlList = [ "https://google.com" ]
-
-urlList2 = [ "https://www.underarmour.com/en-us/mens",
-            "https://www.underarmour.com/en-us/womens",
-            "https://www.underarmour.com/en-us/boys",
-            "https://www.underarmour.com/en-us/girls",
-            "https://www.underarmour.com/en-us/ua-icon-customized-gear",
-            "https://www.underarmour.com/en-us/outlet/g/6" ]
-
-
-testURL = urlList[ random.randint( 0, len(urlList)-1 ) ]
 
 if "driver" not in dir(): # Execute as script from command line
     print( "Running as script")
@@ -131,6 +117,7 @@ if "driver" not in dir(): # Execute as script from command line
              "controllerHost":      os.environ.get('APPDYNAMICS_CONTROLLER_HOST_NAME'),
              "controllerPort":      os.environ.get('APPDYNAMICS_CONTROLLER_PORT'),
              "controllerAdminUser": os.environ.get('APPD_CONTROLLER_ADMIN'),
+             "controllerAccount":   os.environ.get('APPDYNAMICS_AGENT_ACCOUNT_NAME'),
              "controllerPwd":       os.environ.get('APPD_UNIVERSAL_PWD'),
              "schemaName":          "" }
 
@@ -140,7 +127,7 @@ if "driver" not in dir(): # Execute as script from command line
     cmd = sys.argv[1] if len(sys.argv) > 1 else "unknown command"
     if cmd == "runtest1": # runtest1 <schema name>
         auth['schemaName'] = sys.argv[2]
-        runTestCase1( auth, testURL )
+        runTestCase1( auth, random.choice(urlList) )
 
     elif cmd == "createSchema": # createSchema <schema name>
         auth['schemaName'] = sys.argv[2]
@@ -153,6 +140,10 @@ if "driver" not in dir(): # Execute as script from command line
     elif cmd == "query1": # createSchema <schema name>
         auth['schemaName'] = sys.argv[2]
         postQuery(auth=auth)
+
+    elif cmd == "query2": # createSchema <schema name>
+        auth['schemaName'] = sys.argv[2]
+        queryCustomAnalyticsMetric(auth=auth)
 
     else:
         print( "Commands: runtest1, createSchema, deleteSchema")
@@ -176,4 +167,4 @@ else: # Assume running within AppDynamics Synthetic Agent Framework
             measurement_id = "UNDEFINED"
         return measurement_id
 
-    runTestCase1( auth, testURL )
+    runTestCase1( auth, random.choice(urlList) )
