@@ -127,6 +127,7 @@ if "driver" not in dir(): # Execute as script from command line
     cmd = sys.argv[1] if len(sys.argv) > 1 else "unknown command"
     if cmd == "runtest1": # runtest1 <schema name>
         auth['schemaName'] = sys.argv[2]
+        print( "AUTH ", auth )
         runTestCase1( auth, random.choice(urlList) )
 
     elif cmd == "createSchema": # createSchema <schema name>
