@@ -60,5 +60,5 @@ Clone this repository using:
 
 Modify the the file `envvar.sh` to enable authentication to an AppDynamics SaaS Controller.
 
-Contact AppDynamics if you would like further help with this.
+Contact [AppDynamics](https://www.appdynamics.com/) if you would like further help with this.
 
