@@ -31,18 +31,20 @@ In the above schema the string representation of status_code (\_s) allows for th
 Modify the schema as needed to support the use case. See [Supported Data Types](https://docs.appdynamics.com/display/PRO45/Analytics+Events+API)
 
 For demonstration purposes the script randomly selects a URL from a list of URLs scoped for testing defined by:
-```urlList = [ "https://google.com",
+```
+urlList = [ "https://google.com",
              "https://yahoo.com",
              "https://appdynamics.com",
-             "https://google.com/TESTERROR" ]```
+             "https://google.com/TESTERROR" ]
+```
 
 The current script performs a GET request against the selected URL and then posts the response time and status_code to the Events Data Store.
 
-The Python script can be run from the command line or as a Synthetic Job. Run test case `runtest1` from the command line as follows:
+The Python script can be run from the command line or as a Synthetic Job. Run the test case `runtest1` from the command line as follows:
 
 ```python synthetics_events_service.py runtest1 schemaA```
 
-Once this works as desired copy the script to the as an [AppDynamics Synthetics]Job(https://docs.appdynamics.com/display/PRO45/Synthetic+Jobs)
+Once this works as desired copy the script to an [AppDynamics Synthetics]Job(https://docs.appdynamics.com/display/PRO45/Synthetic+Jobs)
 
 The full Python script is available here: [synthetics_events_service.py](https://github.com/APPDRYDER/Synthetics_Events_Service/blob/master/synthetics_events_service.py)
 
