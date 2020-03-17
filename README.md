@@ -50,7 +50,7 @@ Once this works as desired copy the script to an [AppDynamics Synthetics]Job(htt
 
 The full Python script is available here: [synthetics_events_service.py](https://github.com/APPDRYDER/Synthetics_Events_Service/blob/master/synthetics_events_service.py)
 
-The `Events-API-AccountName` and `Events-API-Key` are required for the script to authenticate with the Events Service and these can applied using environment variables or inline in the code when the script runs as a  Synthetics Job. See [Managing API Keys for how to create the API key](https://docs.appdynamics.com/display/PRO45/Managing+API+Keys)
+The `Events-API-AccountName` and `Events-API-Key` are required for the script to authenticate with the Events Service and these can applied using environment variables, inline in the code, or using the [Synthetics Credential Vault](https://docs.appdynamics.com/display/PRO45/Synthetic+Credential+Vault) when the script runs as a  Synthetics Job. See [Managing API Keys for how to create the API key](https://docs.appdynamics.com/display/PRO45/Managing+API+Keys)
 
 # Getting Started
 
