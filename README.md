@@ -21,6 +21,6 @@ The Python script can be run from the command line or as a Synthetic Job. Run th
 
 ```python synthetics_events_service.py runtest1 schemaA```
 
-The full Python script is available at: ```https://github.com/APPDRYDER/Synthetics_Events_Service```
+The full Python script is available here: [synthetics_events_service.py](https://github.com/APPDRYDER/Synthetics_Events_Service/blob/master/synthetics_events_service.py)
 
 The `Events-API-AccountName` and `Events-API-Key` are required for the script to authenticate with the Events Service and these can applied using environment variables or inline in the code when the script runs as a  Synthetics Job
