@@ -19,11 +19,12 @@ The Python script should be used to create and delete custom schems from the com
 
 In this example script the custom schema is defined as:
 ```
-exampleSchema = { "schema": { "testid": "integer",
-                                 "status_code": "integer",
-                                 "status_code_s": "string",
-                                 "response_time": "integer",
-                                 "url":"string", "mesid":"string” }  }
+exampleSchema = { "schema": { "testid":         "integer",
+                              "status_code":    "integer",
+                              "status_code_s":  "string",
+                              "response_time":  "integer",
+                              "url":            "string",
+                              "mesid":          "string” }  }
 ```
 
 In the above schema the string representation of status_code (\_s) allows for the `status_code` to be used as a Legend in dashboard charts.
