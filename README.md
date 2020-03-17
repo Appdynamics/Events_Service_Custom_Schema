@@ -2,9 +2,9 @@
 
 This Python scripts demonstrates how to use the AppDynamics Event Service Data Store to create a custom schema and post metrics to the schema.
 
-Once metrics are posted to the AppDynamics Event Service Data, [Dynamics Baselines](https://docs.appdynamics.com/display/PRO45/Dynamic+Baselines) are established for the metrics, [Actional Alerts can be enabled](https://docs.appdynamics.com/display/PRO45/Alert+and+Respond), and [Dashboards Created](https://docs.appdynamics.com/display/PRO45/Dashboards+and+Reports)
+Once metrics are posted to the AppDynamics Event Service Data: [Dynamics Baselines](https://docs.appdynamics.com/display/PRO45/Dynamic+Baselines) are established for the metrics, [Actional Alerts](https://docs.appdynamics.com/display/PRO45/Alert+and+Respond), can be enabled and [Dashboards](https://docs.appdynamics.com/display/PRO45/Dashboards+and+Reports) created.
 
-This working example is runnable as either an AppDynamics Synthetics Job, or from the command line. It provides the following functionality:
+This working example is runnable as either an AppDynamics [Synthetics](https://docs.appdynamics.com/display/PRO45/Browser+Synthetic+Monitoring) Job, or from the command line. It provides the following functionality:
 * Create and delete custom schemas
 * Measure the perform of a POST/GET request to an arbitary URL
 * Post metrics to the custom schema
