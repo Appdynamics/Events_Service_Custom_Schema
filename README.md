@@ -9,7 +9,7 @@ This working example is runnable as either an AppDynamics [Synthetics](https://d
 * Measure the perform of a POST/GET request to an arbitary URL
 * Post metrics to the custom schema
 
-# Create a Customm Schema
+# Create a Custom Schema
 
 The Python script should be used to create and delete custom schems from the command line:
 
@@ -39,7 +39,7 @@ urlList = [ "https://google.com",
              "https://google.com/TESTERROR" ]
 ```
 
-# Posting Metrics
+# Post Metrics
 The current script performs a GET request against the selected URL and then posts the response time and status_code to the Events Data Store.
 
 The Python script can be run from the command line or as a Synthetic Job. Run the test case `runtest1` from the command line as follows:
