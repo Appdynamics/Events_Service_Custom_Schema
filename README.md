@@ -2,9 +2,9 @@
 
 This Python scripts demonstrates how to use the AppDynamics Event Service Data Store to create a custom schema and post metrics to the schema.
 
-Once metrics are posted to the AppDynamics Event Service Data, [Dynamics Baselines](https://docs.appdynamics.com/display/PRO45/Dynamic+Baselines) are established for the metrics, [Actional Alerts enabled](https://docs.appdynamics.com/display/PRO45/Alert+and+Respond), and [Dashboards Created](https://docs.appdynamics.com/display/PRO45/Dashboards+and+Reports)
+Once metrics are posted to the AppDynamics Event Service Data, [Dynamics Baselines](https://docs.appdynamics.com/display/PRO45/Dynamic+Baselines) are established for the metrics, [Actional Alerts can be enabled](https://docs.appdynamics.com/display/PRO45/Alert+and+Respond), and [Dashboards Created](https://docs.appdynamics.com/display/PRO45/Dashboards+and+Reports)
 
-This working example is runnable as either an AppDynamics Syntehics Job, or from the command line. It provides the following functionality:
+This working example is runnable as either an AppDynamics Synthetics Job, or from the command line. It provides the following functionality:
 * Create and delete custom schemas
 * Measure the perform of a POST/GET request to an arbitary URL
 * Post metrics to the custom schema
@@ -12,15 +12,19 @@ This working example is runnable as either an AppDynamics Syntehics Job, or from
 # Create a Customm Schema
 
 The Python script should be used to create and delete custom schems from the command line:
+
 ```python eventsServiceTest.py deleteSchema schemaA```
+
 ```python eventsServiceTest.py createSchema schemaA```
 
 In this example script the custom schema is defined as:
-```exampleSchema = { "schema": { "testid": "integer",
+```
+exampleSchema = { "schema": { "testid": "integer",
                                  "status_code": "integer",
                                  "status_code_s": "string",
                                  "response_time": "integer",
-                                 "url":"string", "mesid":"string” }  }```
+                                 "url":"string", "mesid":"string” }  }
+```
 
 In the above schema the string representation of status_code (\_s) allows for the `status_code` to be used as a Legend in dashboard charts.
 
