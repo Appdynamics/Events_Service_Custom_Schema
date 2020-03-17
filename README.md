@@ -9,17 +9,15 @@ The Python script creates a custom schema from the command line, examples:
 Using the schemea: 
   ```exampleSchema = { "schema": { "testid":"integer", "status_code":"integer", "status_code_s":"string", "response_time":   "integer", "url":"string", "mesid":"string” }  }```
 
-The string representation of status_code (\_s) allowed for the status_code to be used as a Legend in dashboard charts.
+The string representation of status_code (\_s) allows for the status_code to be used as a Legend in dashboard charts.
 
 For demonstration purposes the script randomly selects a URL from a list of URLs scoped for testing:
 
 `Example urlList = [ "https://customer.com/login", "https://customer.com/service1", "https://customer.com/service2” ]`
 
-And then posts the tested URL response time and status_code to the Events Data Store. The Python script can be run from the command line or as a Synthetic Job.
+And then posts the tested URL response time and status_code to the Events Data Store. Once the metrics are reported to the Events Store alerts can be enabled and dashboards created.
 
-Once the metrics are reported to the Events Store alerts can be enabled and dashboards created.
-
-The script can run from the command line as follows:
+The Python script can be run from the command line or as a Synthetic Job. Run the script from the command line as follows:
 
 ```python synthetics_events_service.py runtest1 schemaA```
 
