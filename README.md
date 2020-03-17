@@ -46,7 +46,7 @@ The Python script can be run from the command line or as a Synthetic Job. Run th
 
 ```python synthetics_events_service.py runtest1 schemaA```
 
-Once this works as desired copy the script to an [AppDynamics Synthetics]Job(https://docs.appdynamics.com/display/PRO45/Synthetic+Jobs)
+Once this works as desired copy the script to an [AppDynamics Synthetics Job](https://docs.appdynamics.com/display/PRO45/Synthetic+Jobs) 
 
 The full Python script is available here: [synthetics_events_service.py](https://github.com/APPDRYDER/Synthetics_Events_Service/blob/master/synthetics_events_service.py)
 
