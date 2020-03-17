@@ -13,7 +13,7 @@ The string representation of status_code (\_s) allowed for the status_code to be
 
 For demonstration purposes the script randomly selects a URL from a list of URLs scoped for testing:
 
-Example urlList = [ "https://customer.com/login", "https://customer.com/service1", "https://customer.com/service2” ]
+`Example urlList = [ "https://customer.com/login", "https://customer.com/service1", "https://customer.com/service2” ]`
 
 And then posts the tested URL response time and status_code to the Events Data Store. The Python script can be run from the command line or as a Synthetic Job.
 
