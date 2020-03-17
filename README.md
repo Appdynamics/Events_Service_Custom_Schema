@@ -39,6 +39,7 @@ urlList = [ "https://google.com",
              "https://google.com/TESTERROR" ]
 ```
 
+# Posting Metrics
 The current script performs a GET request against the selected URL and then posts the response time and status_code to the Events Data Store.
 
 The Python script can be run from the command line or as a Synthetic Job. Run the test case `runtest1` from the command line as follows:
@@ -50,6 +51,14 @@ Once this works as desired copy the script to an [AppDynamics Synthetics]Job(htt
 The full Python script is available here: [synthetics_events_service.py](https://github.com/APPDRYDER/Synthetics_Events_Service/blob/master/synthetics_events_service.py)
 
 The `Events-API-AccountName` and `Events-API-Key` are required for the script to authenticate with the Events Service and these can applied using environment variables or inline in the code when the script runs as a  Synthetics Job. See [Managing API Keys for how to create the API key](https://docs.appdynamics.com/display/PRO45/Managing+API+Keys)
+
+# Getting Started
+
+Clone this repository using:
+
+`git clone https://github.com/APPDRYDER/Synthetics_Events_Service`
+
+Modify the the file `envvar.sh` to enable authentication to an AppDynamics SaaS Controller.
 
 Contact AppDynmaics if you would like further help with this.
 
