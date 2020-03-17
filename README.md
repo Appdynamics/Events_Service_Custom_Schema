@@ -13,9 +13,9 @@ This working example is runnable as either an AppDynamics [Synthetics](https://d
 
 The Python script should be used to create and delete custom schems from the command line:
 
-```python eventsServiceTest.py deleteSchema schemaA```
+```python synthetics_events_service.py deleteSchema schemaA```
 
-```python eventsServiceTest.py createSchema schemaA```
+```python synthetics_events_service.py createSchema schemaA```
 
 In this example script the custom schema is defined as:
 ```
